@@ -90,3 +90,7 @@ The strings are encoded in "base 62" (i.e using digits and uppercase/lowercase l
 1) The `kuuid` library can only be used to store dates after the epoch on `1970-01-01`.
 2) The random number is genreated using Node.js's [crypto.randomBytes](https://nodejs.org/dist/latest-v8.x/docs/api/crypto.html#crypto_crypto_randombytes_size_callback) which is a secure, if slow, source of random information.
 3) The character set used by the base-62 encoding algorithm differs from other algorithms I've seen to ensure that it sorts correctly in a CouchDB `_id` field.
+
+## Further reading
+
+- [A Brief History of the UUID](https://segment.com/blog/a-brief-history-of-the-uuid/)
