@@ -39,5 +39,9 @@ describe('kuuid', function() {
     }
   })
 
-
+  it('should take a user-supplied timestamp', function() {
+    let id = kuuid('2018-01-01')
+    let prefix = id.substr(0, 8)
+    assert.equal(prefix, '001eVnWK')
+  })
 })

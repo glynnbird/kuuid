@@ -13,9 +13,11 @@ const ts = require('./lib/ts.js')
 const base62Encode = require('./lib/base62.js')
 
 // generate a kuuid
-let kuuid = function () {
+let kuuid = function (t) {
+
+
   // get time stamp for now
-  const timestamp = ts()
+  const timestamp = ts(t)
 
   // turn timestamp into 8-digit, base-62 encoded string
   let str = base62Encode(timestamp).padStart(8, '0')
