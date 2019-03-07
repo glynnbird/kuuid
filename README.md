@@ -8,7 +8,7 @@ If you need unique identifiers in your Node.js app for use in a database such as
 - unique - no two ids will be the same, or at least the likelihood of a clash is vanishingly small.
 - time-sortable - the ids sort into time order, with one second precision.
 
-If a `kuuid`-generated id were used as a database's unique identifier, it would sort roughly in time order.
+If a `kuuid`-generated id were used as a database's unique identifier, it would sort roughly in time order (`kuuid.id()`), or reverse time order (`kuuid.idr()`)
 
 ## Installation
 
@@ -59,6 +59,20 @@ kuuid.id('2018-07-20T10:10:34.234Z')
 kuuid.id(1514764800000)
 ```
 
+## Reverse mode
+
+If you want your data to sort into "newest first" order, then `kuuid.idr()` returns an id that sorts in the opposite order:
+
+```js
+// 'now'
+kuuid.idr()
+// zzyIy6DZ2SKTqh2WpV6D0DTbkK0kbn5u
+
+// Epoch
+kuuid.idr('1970-01-01T00:00:00Z')
+// zzzzzzzz2v3VKT4Sl9yV2f6v673SDt5v
+```
+
 ## Generating a prefix
 
 If you only need the time-based prefix, you can call `kuuid.prefix()`:
@@ -74,11 +88,17 @@ kuuid.prefix('2018-07-20T10:10:34.234Z')
 kuuid.prefix(1514764800000)
 ```
 
+or for a reverse-mode prefix:
+
+```js
+kuuid.prefixReverse()
+```
+
 ## How does it work?
 
 A `kuuid.id()` string has two parts:
 
-- 8 charact.ers representing the number of seconds since 1st January 1970.
+- 8 characters representing the number of seconds since 1st January 1970.
 - 24 characters containing random data.
 
 The front eight characters allow the string to be sorted by time. Two ids created in the same second will have the same front eight characters. The remaining 24 characters contain 128 bits of random data.
