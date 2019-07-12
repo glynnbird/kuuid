@@ -18,7 +18,14 @@ declare namespace kuuid {
    * @param t ISO-8601 date string or number of milliseconds since 1970
    * @return 8-character prefix string
    */
-  function prefix(t? : string | number): string;
+  function prefixr(t? : string | number): string;
+
+    /**
+   * Generate the 8-character prefix - ms mode
+   * @param t ISO-8601 date string or number of milliseconds since 1970
+   * @return 8-character prefix string
+   */
+  function prefixms(t? : string | number): string;
 
   /**
    * Generate 128-bits of random date encoded as 24 character string
@@ -38,7 +45,14 @@ declare namespace kuuid {
    * @param t ISO-8601 date string or number of milliseconds since 1970
    * @return 32-character id
    */
-  function id(t? : string | number): string;
+  function idr(t? : string | number): string;
+
+    /**
+   * Generate a millisecond, time sortable 32 character unique identifier
+   * @param t ISO-8601 date string or number of milliseconds since 1970
+   * @return 32-character id
+   */
+  function idms(t? : string | number): string;
 }
 
 export = kuuid
