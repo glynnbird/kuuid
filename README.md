@@ -73,6 +73,16 @@ kuuid.idr('1970-01-01T00:00:00Z')
 // zzzzzzzz2v3VKT4Sl9yV2f6v673SDt5v
 ```
 
+## Millisecond mode
+
+If you want your ids to have millsecond prevision then use `idms()`:
+
+```js
+// 'now'
+kuuid.idms()
+// 0RW2yGC21miE8r3oeOun2pGeIp0EoQNu
+```
+
 ## Generating a prefix
 
 If you only need the time-based prefix, you can call `kuuid.prefix()`:
@@ -92,6 +102,12 @@ or for a reverse-mode prefix:
 
 ```js
 kuuid.prefixReverse()
+```
+
+or for a millisecond-precision version:
+
+```js
+kuuid.prefixms()
 ```
 
 ## How does it work?

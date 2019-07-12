@@ -11,13 +11,14 @@ if (!String.prototype.padStart) {
 
 // generate a timestamp since the epoch
 const ts = require('./lib/ts.js')
+const tsms = require('./lib/tsms.js')
 
 // base62 encode a number
 const base62Encode = require('./lib/base62.js')
 
 // calculate an 8-digit prefix for the timestamp 't'
 // that is base62 encoded and sorts in time order
-let prefix = function (t) {
+const prefix = function (t) {
   // get time stamp for now
   const timestamp = ts(t)
 
@@ -26,8 +27,19 @@ let prefix = function (t) {
 }
 
 // calculate an 8-digit prefix for the timestamp 't'
+// that is base62 encoded and sorts in time order
+// but with milliseconds
+const prefixms = function (t) {
+  // get time stamp for now
+  const timestamp = tsms(t)
+
+  // turn timestamp into 8-digit, base-62 encoded string
+  return base62Encode(timestamp).padStart(8, '0')
+}
+
+// calculate an 8-digit prefix for the timestamp 't'
 // that is base62 encoded and sorts in reverse time order
-let prefixReverse = function (t) {
+const prefixReverse = function (t) {
   // get time stamp for now
   const timestamp = maxTS - ts(t)
 
@@ -35,7 +47,7 @@ let prefixReverse = function (t) {
   return base62Encode(timestamp).padStart(8, '0')
 }
 
-let rand = function () {
+const rand = function () {
   // we want 128-bits of random data. To do this we
   // add 4 batches of 4 random bytes encoded as 6-digit, base-62 encoded strings
   let randomStr = ''
@@ -47,19 +59,26 @@ let rand = function () {
 }
 
 // generate a kuuid
-let id = function (t) {
+const id = function (t) {
   return prefix(t) + rand()
 }
 
+// generate a kuuid with ms
+const idms = function (t) {
+  return prefixms(t) + rand()
+}
+
 // generate a kuuid (reverse mode)
-let idr = function (t) {
+const idr = function (t) {
   return prefixReverse(t) + rand()
 }
 
 module.exports = {
   id: id,
   idr: idr,
+  idms: idms,
   rand: rand,
   prefix: prefix,
+  prefixms: prefixms,
   prefixReverse: prefixReverse
 }
