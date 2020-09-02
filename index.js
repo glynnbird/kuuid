@@ -47,11 +47,14 @@ const prefixReverse = function (t) {
   return base62Encode(timestamp).padStart(8, '0')
 }
 
-const rand = function () {
+const rand = function (n) {
+  if (!n) {
+    n = 4
+  }
   // we want 128-bits of random data. To do this we
   // add 4 batches of 4 random bytes encoded as 6-digit, base-62 encoded strings
   let randomStr = ''
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < n; i++) {
     const rand = crypto.randomBytes(4).toString('hex')
     randomStr += base62Encode(parseInt(rand, 16)).padStart(6, '0')
   }
@@ -73,9 +76,21 @@ const idr = function (t) {
   return prefixReverse(t) + rand()
 }
 
+// generate short id
+const ids = function (t) {
+  return prefixms(t) + rand(2)
+}
+
+// generate short id
+const idsr = function (t) {
+  return prefixReverse(t) + rand(2)
+}
+
 module.exports = {
   id: id,
   idr: idr,
+  ids: ids,
+  idsr: idsr,
   idms: idms,
   rand: rand,
   prefix: prefix,

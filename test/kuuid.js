@@ -114,4 +114,44 @@ describe('kuuid', function () {
       ids.push(k)
     }
   })
+
+  it('should return ids that sort correctly - short', function (done) {
+    this.timeout(30000)
+    const ids = []
+    const interval = setInterval(function () {
+      ids.push(kuuid.ids())
+      if (ids.length === 20) {
+        process.stdout.write('\n')
+        const j1 = JSON.stringify(ids)
+        ids.sort()
+        const j2 = JSON.stringify(ids)
+        // make sure sorting has had no effect i.e. they were sorted already
+        assert.strictEqual(j1, j2)
+        clearInterval(interval)
+        done()
+      } else {
+        process.stdout.write('.')
+      }
+    }, 1100)
+  })
+
+  it('should return ids that sort correctly - short reverse mode', function (done) {
+    this.timeout(30000)
+    const ids = []
+    const interval = setInterval(function () {
+      ids.push(kuuid.idsr())
+      if (ids.length === 20) {
+        process.stdout.write('\n')
+        const j1 = JSON.stringify(ids)
+        ids.sort().reverse()
+        const j2 = JSON.stringify(ids)
+        // make sure sorting has had no effect i.e. they were sorted already
+        assert.strictEqual(j1, j2)
+        clearInterval(interval)
+        done()
+      } else {
+        process.stdout.write('.')
+      }
+    }, 1100)
+  })
 })
