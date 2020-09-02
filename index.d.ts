@@ -48,6 +48,20 @@ declare namespace kuuid {
   function idr(t? : string | number): string;
 
     /**
+   * Generate short a date/time sortable 32 character unique identifier
+   * @param t ISO-8601 date string or number of milliseconds since 1970
+   * @return 32-character id
+   */
+  function ids(t? : string | number): string;
+
+  /**
+   * Generate short a reverse date/time sortable 32 character unique identifier
+   * @param t ISO-8601 date string or number of milliseconds since 1970
+   * @return 32-character id
+   */
+  function idsr(t? : string | number): string;
+
+    /**
    * Generate a millisecond, time sortable 32 character unique identifier
    * @param t ISO-8601 date string or number of milliseconds since 1970
    * @return 32-character id

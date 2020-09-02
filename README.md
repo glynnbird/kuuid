@@ -83,6 +83,20 @@ kuuid.idms()
 // 0RW2yGC21miE8r3oeOun2pGeIp0EoQNu
 ```
 
+## Short ids
+
+If you want your ids shorter (timestamp + 64 bits of random data ), then use `ids()` & `idsr()` for forward and reverse, respectively:
+
+```js
+// forward
+kuuid.ids()
+// 0S9QEzP23Wyk3p4IfNi6
+
+// reverse
+kuuid.idsr()
+// zzyFmalU06RfUZ3zMoay
+```
+
 ## Generating a prefix
 
 If you only need the time-based prefix, you can call `kuuid.prefix()`:
