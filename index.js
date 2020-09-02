@@ -77,12 +77,12 @@ const idr = function (t) {
 }
 
 // generate short id
-const ids = function(t) {
+const ids = function (t) {
   return prefixms(t) + rand(2)
 }
 
 // generate short id
-const idsr = function(t) {
+const idsr = function (t) {
   return prefixReverse(t) + rand(2)
 }
 
