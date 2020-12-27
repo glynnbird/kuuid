@@ -1,3 +1,19 @@
+# This is an intent for the PHP version
+
+**DO NOT USE.**
+
+All ordering tests fails.
+
+To run the PHP tests (in console): 
+
+```bash
+php ts.php 
+php base62.php 
+php kuuid.php 
+```
+
+
+
 # kuuid
 
 [![Build Status](https://travis-ci.org/glynnbird/kuuid.svg?branch=master)](https://travis-ci.org/glynnbird/kuuid) [![npm version](https://badge.fury.io/js/kuuid.svg)](https://badge.fury.io/js/kuuid)
@@ -9,6 +25,7 @@ If you need unique identifiers in your Node.js app for use in a database such as
 - time-sortable - the ids sort into time order, with one second precision.
 
 If a `kuuid`-generated id were used as a database's unique identifier, it would sort roughly in time order (`kuuid.id()`), or reverse time order (`kuuid.idr()`)
+
 
 ## Installation
 

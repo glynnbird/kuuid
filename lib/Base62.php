@@ -1,0 +1,80 @@
+<?php
+
+/*
+
+Copyright (c) 2016-2018 Mika Tuupola
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+*/
+
+/**
+ * @see       https://github.com/tuupola/base62
+ * @license   https://www.opensource.org/licenses/mit-license.php
+ */
+
+
+
+require_once "Base62_PhpEncoder.php";
+
+class Base62
+{
+    /**
+     * @var Base62_PhpEncoder
+     */
+    private $encoder;
+
+
+    public function __construct()
+    {
+            $this->encoder = new Base62_PhpEncoder();
+    }
+
+    /**
+     * Encode given data to a base62 string
+     */
+    public function encode($data)
+    {
+        return $this->encoder->encode($data);
+    }
+
+    /**
+     * Decode given a base62 string back to data
+     */
+    public function decode($data)
+    {
+        return $this->encoder->decode($data);
+    }
+
+    /**
+     * Encode given integer to a base62 string
+     */
+    public function encodeInteger($data)
+    {
+        return $this->encoder->encodeInteger($data);
+    }
+
+    /**
+     * Decode given base62 string back to an integer
+     */
+    public function decodeInteger($data)
+    {
+        return $this->encoder->decodeInteger($data);
+    }
+}
