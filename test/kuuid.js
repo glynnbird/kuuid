@@ -4,6 +4,7 @@ const assert = require('assert')
 describe('kuuid', function () {
   it('should return 32 character id', function () {
     const x = kuuid.id()
+    process.stdout.write(x + '\n')
     assert.strictEqual(x.length, 32)
   })
 
@@ -11,7 +12,9 @@ describe('kuuid', function () {
     this.timeout(30000)
     const ids = []
     const interval = setInterval(function () {
-      ids.push(kuuid.id())
+      var x = kuuid.id()
+      ids.push(x)
+      process.stdout.write(x + '\n')
       if (ids.length === 20) {
         process.stdout.write('\n')
         const j1 = JSON.stringify(ids)
@@ -30,8 +33,11 @@ describe('kuuid', function () {
   it('should return ids that sort correctly - reverse mode', function (done) {
     this.timeout(30000)
     const ids = []
+
     const interval = setInterval(function () {
-      ids.push(kuuid.idr())
+      var x = kuuid.idr()
+      ids.push(x)
+      process.stdout.write(x + '\n')
       if (ids.length === 20) {
         process.stdout.write('\n')
         const j1 = JSON.stringify(ids)
