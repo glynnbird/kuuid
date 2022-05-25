@@ -54,7 +54,7 @@ const rand = function (n) {
   // we want 128-bits of random data. To do this we
   // add 4 batches of 4 random bytes encoded as 6-digit, base-62 encoded strings
   let randomStr = ''
-  for (var i = 0; i < n; i++) {
+  for (let i = 0; i < n; i++) {
     const rand = crypto.randomBytes(4).toString('hex')
     randomStr += base62Encode(parseInt(rand, 16)).padStart(6, '0')
   }
@@ -87,13 +87,13 @@ const idsr = function (t) {
 }
 
 module.exports = {
-  id: id,
-  idr: idr,
-  ids: ids,
-  idsr: idsr,
-  idms: idms,
-  rand: rand,
-  prefix: prefix,
-  prefixms: prefixms,
-  prefixReverse: prefixReverse
+  id,
+  idr,
+  ids,
+  idsr,
+  idms,
+  rand,
+  prefix,
+  prefixms,
+  prefixReverse
 }

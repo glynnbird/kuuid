@@ -50,7 +50,7 @@ describe('kuuid', function () {
   it('should return unique ids', function () {
     this.timeout(30000)
     const ids = []
-    for (var i = 0; i < 10000; i++) {
+    for (let i = 0; i < 10000; i++) {
       const k = kuuid.id()
       assert.strictEqual(-1, ids.indexOf(k))
       ids.push(k)
@@ -108,7 +108,7 @@ describe('kuuid', function () {
   it('should generate random data', function () {
     this.timeout(30000)
     const ids = []
-    for (var i = 0; i < 10000; i++) {
+    for (let i = 0; i < 10000; i++) {
       const k = kuuid.rand()
       assert.strictEqual(-1, ids.indexOf(k))
       ids.push(k)
