@@ -18,48 +18,30 @@ const base62Encode = require('./lib/base62.js')
 
 // calculate an 8-digit prefix for the timestamp 't'
 // that is base62 encoded and sorts in time order
-const prefix = function (t) {
+const prefix = function (opts) {
+  if (typeof opts === 'string' || typeof opts === 'number') {
+    opts = {
+      timestamp: opts,
+      reverse: false,
+      random: 4,
+      millisecond: false
+    }
+  } else {
+    opts = opts || {}
+  }
+
   // get time stamp for now
-  const timestamp = ts(t)
-
-  // turn timestamp into 8-digit, base-62 encoded string
-  return base62Encode(timestamp).padStart(8, '0')
-}
-
-// calculate an 8-digit prefix for the timestamp 't'
-// that is base62 encoded and sorts in time order
-// but with milliseconds
-const prefixms = function (t) {
-  // get time stamp for now
-  const timestamp = tsms(t)
-
-  // turn timestamp into 8-digit, base-62 encoded string
-  return base62Encode(timestamp).padStart(8, '0')
-}
-
-// calculate an 8-digit prefix for the timestamp 't'
-// that is base62 encoded and sorts in reverse time order
-const prefixReverse = function (t) {
-  // get time stamp for now
-  const timestamp = maxTS - ts(t)
-
-  // turn timestamp into 8-digit, base-62 encoded string
-  return base62Encode(timestamp).padStart(8, '0')
-}
-
-// calculate an 8-digit prefix for the timestamp 't'
-// that is base62 encoded and sorts in reverse time order
-// but with milliseconds
-const prefixReverseMs = function (t) {
-  // get time stamp for now
-  const timestamp = maxTS - tsms(t)
+  let timestamp = opts.millisecond ? tsms(opts.timestamp) : ts(opts.timestamp)
+  if (opts.reverse) {
+    timestamp = maxTS - timestamp
+  }
 
   // turn timestamp into 8-digit, base-62 encoded string
   return base62Encode(timestamp).padStart(8, '0')
 }
 
 const rand = function (n) {
-  if (!n) {
+  if (!n || n < 1 || n > 4) {
     n = 4
   }
   // we want 128-bits of random data. To do this we
@@ -73,33 +55,60 @@ const rand = function (n) {
 }
 
 // generate a kuuid
-const id = function (t) {
-  return prefix(t) + rand()
+const id = function (opts) {
+  opts = opts || {}
+  const ty = typeof opts
+  if (['string', 'number'].includes(ty)) {
+    return prefix(opts) + rand()
+  }
+  if (ty === 'object') {
+    opts.timestamp = opts.timestamp ? opts.timestamp : undefined
+    opts.random = opts.random ? opts.random : 4
+    opts.reverse = !!opts.reverse
+    opts.millisecond = !!opts.millisecond
+    return prefix(opts) + rand(opts.random)
+  }
+  throw new Error('invalid parameters')
 }
 
 // generate a kuuid with ms
 const idms = function (t) {
-  return prefixms(t) + rand()
+  return id({ timestamp: t, millisecond: true })
 }
 
 // generate a kuuid (reverse mode)
 const idr = function (t) {
-  return prefixReverse(t) + rand()
+  return id({ timestamp: t, reverse: true })
 }
 
 // generate a kuuid (reverse mode)
 const idmsr = function (t) {
-  return prefixReverseMs(t) + rand()
+  return id({ timestamp: t, reverse: true, millisecond: true })
 }
 
 // generate short id
 const ids = function (t) {
-  return prefixms(t) + rand(2)
+  return id({ timestamp: t, random: 2 })
 }
 
-// generate short id
+// generate short id (reverse)
 const idsr = function (t) {
-  return prefixReverse(t) + rand(2)
+  return id({ timestamp: t, reverse: true, random: 2 })
+}
+
+// prefix milliseconds
+const prefixms = function (t) {
+  return prefix({ timestamp: t, millisecond: true })
+}
+
+// prefix reverse
+const prefixReverse = function (t) {
+  return prefix({ timestamp: t, reverse: true })
+}
+
+// prefix milliseconds reverse
+const prefixReverseMs = function (t) {
+  return prefix({ timestamp: t, reverse: true, millisecond: true })
 }
 
 module.exports = {
