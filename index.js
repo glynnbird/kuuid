@@ -47,6 +47,17 @@ const prefixReverse = function (t) {
   return base62Encode(timestamp).padStart(8, '0')
 }
 
+// calculate an 8-digit prefix for the timestamp 't'
+// that is base62 encoded and sorts in reverse time order
+// but with milliseconds
+const prefixReverseMs = function (t) {
+  // get time stamp for now
+  const timestamp = maxTS - tsms(t)
+
+  // turn timestamp into 8-digit, base-62 encoded string
+  return base62Encode(timestamp).padStart(8, '0')
+}
+
 const rand = function (n) {
   if (!n) {
     n = 4
@@ -76,6 +87,11 @@ const idr = function (t) {
   return prefixReverse(t) + rand()
 }
 
+// generate a kuuid (reverse mode)
+const idmsr = function (t) {
+  return prefixReverseMs(t) + rand()
+}
+
 // generate short id
 const ids = function (t) {
   return prefixms(t) + rand(2)
@@ -92,8 +108,10 @@ module.exports = {
   ids,
   idsr,
   idms,
+  idmsr,
   rand,
   prefix,
   prefixms,
-  prefixReverse
+  prefixReverse,
+  prefixReverseMs
 }

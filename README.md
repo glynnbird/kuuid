@@ -80,7 +80,13 @@ If you want your ids to have millsecond prevision then use `idms()`:
 ```js
 // 'now'
 kuuid.idms()
-// 0RW2yGC21miE8r3oeOun2pGeIp0EoQNu
+// 0T6vppV82RX4Nx1ZzGqB0Exjjs4fkuhh
+```
+
+```js
+// 'now' reverse
+kuuid.idmsr()
+// zWt4A9Wz3TxK0h4MRkec06xADk3kIemn
 ```
 
 ## Short ids
@@ -122,6 +128,12 @@ or for a millisecond-precision version:
 
 ```js
 kuuid.prefixms()
+```
+
+or for a millisecond-precision reversed version:
+
+```js
+kuuid.prefixReverseMs()
 ```
 
 ## How does it work?
