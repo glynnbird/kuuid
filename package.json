@@ -1,6 +1,6 @@
 {
   "name": "kuuid",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "K-sortable UUID - roughly time-sortable unique id generator",
   "main": "index.js",
   "types": "index.d.ts",
@@ -26,8 +26,8 @@
     "node": ">=16.0.0"
   },
   "devDependencies": {
-    "mocha": "^10.0.0",
-    "standard": "^17.0.0"
+    "mocha": "^10.3.0",
+    "standard": "^17.1.0"
   },
   "standard": {
     "env": [
