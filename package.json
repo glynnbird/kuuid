@@ -1,7 +1,7 @@
 {
   "name": "kuuid",
   "version": "1.0.3",
-  "description": "K-sortable UUID - roughly time-sortable unique id generator",
+  "description": "Time-sortable UUID - roughly time-sortable unique id generator",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
