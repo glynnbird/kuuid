@@ -5,8 +5,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "standard": "standard --fix",
-    "test": "standard && mocha"
+    "test": "node --test"
   },
   "repository": {
     "type": "git",
@@ -24,14 +23,5 @@
   "homepage": "https://github.com/glynnbird/kuuid#readme",
   "engines": {
     "node": ">=16.0.0"
-  },
-  "devDependencies": {
-    "mocha": "^10.3.0",
-    "standard": "^17.1.0"
-  },
-  "standard": {
-    "env": [
-      "mocha"
-    ]
   }
 }
