@@ -4,11 +4,6 @@ const crypto = require('crypto')
 // the maximum timestamp achievable (8 digits of base 62)
 const maxTS = Math.pow(62, 8) - 1
 
-// padStart polyfill
-if (!String.prototype.padStart) {
-  String.prototype.padStart = require('./lib/padStart.js') // eslint-disable-line
-}
-
 // generate a timestamp since the epoch
 const ts = require('./lib/ts.js')
 const tsms = require('./lib/tsms.js')
