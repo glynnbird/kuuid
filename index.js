@@ -1,19 +1,15 @@
 // standard Node.js crypto library
-const crypto = require('crypto')
+import * as crypto from 'node:crypto'
+import { ts } from './lib/ts.js'
+import { tsms } from './lib/tsms.js'
+import { base62Encode } from './lib/base62.js'
 
 // the maximum timestamp achievable (8 digits of base 62)
 const maxTS = Math.pow(62, 8) - 1
 
-// generate a timestamp since the epoch
-const ts = require('./lib/ts.js')
-const tsms = require('./lib/tsms.js')
-
-// base62 encode a number
-const base62Encode = require('./lib/base62.js')
-
 // calculate an 8-digit prefix for the timestamp 't'
 // that is base62 encoded and sorts in time order
-const prefix = function (opts) {
+export function  prefix(opts) {
   if (typeof opts === 'string' || typeof opts === 'number') {
     opts = {
       timestamp: opts,
@@ -35,7 +31,7 @@ const prefix = function (opts) {
   return base62Encode(timestamp).padStart(8, '0')
 }
 
-const rand = function (n) {
+export function rand(n) {
   if (!n || n < 1 || n > 4) {
     n = 4
   }
@@ -50,7 +46,7 @@ const rand = function (n) {
 }
 
 // generate a kuuid
-const id = function (opts) {
+export function id(opts) {
   opts = opts || {}
   const ty = typeof opts
   if (['string', 'number'].includes(ty)) {
@@ -67,55 +63,41 @@ const id = function (opts) {
 }
 
 // generate a kuuid with ms
-const idms = function (t) {
+export function idms(t) {
   return id({ timestamp: t, millisecond: true })
 }
 
 // generate a kuuid (reverse mode)
-const idr = function (t) {
+export function idr(t) {
   return id({ timestamp: t, reverse: true })
 }
 
 // generate a kuuid (reverse mode)
-const idmsr = function (t) {
+export function idmsr(t) {
   return id({ timestamp: t, reverse: true, millisecond: true })
 }
 
 // generate short id
-const ids = function (t) {
+export function ids(t) {
   return id({ timestamp: t, random: 2 })
 }
 
 // generate short id (reverse)
-const idsr = function (t) {
+export function idsr(t) {
   return id({ timestamp: t, reverse: true, random: 2 })
 }
 
 // prefix milliseconds
-const prefixms = function (t) {
+export function prefixms(t) {
   return prefix({ timestamp: t, millisecond: true })
 }
 
 // prefix reverse
-const prefixReverse = function (t) {
+export function prefixReverse(t) {
   return prefix({ timestamp: t, reverse: true })
 }
 
 // prefix milliseconds reverse
-const prefixReverseMs = function (t) {
+export function prefixReverseMs(t) {
   return prefix({ timestamp: t, reverse: true, millisecond: true })
-}
-
-module.exports = {
-  id,
-  idr,
-  ids,
-  idsr,
-  idms,
-  idmsr,
-  rand,
-  prefix,
-  prefixms,
-  prefixReverse,
-  prefixReverseMs
 }

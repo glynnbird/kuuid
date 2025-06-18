@@ -1,7 +1,5 @@
 # kuuid
 
-[![npm version](https://badge.fury.io/js/kuuid.svg)](https://badge.fury.io/js/kuuid)
-
 If you need unique identifiers in your Node.js app for use in a database such as Apache CouchDB or Cloudant, then *kuuid* can generate them. The ids it generates are:
 
 - uniform - all ids are 32 characters long.
@@ -21,7 +19,7 @@ npm install --save kuuid
 Import the library into your code with:
 
 ```js
-const kuuid = require('kuuid')
+import * as kuuid from 'kuuid'
 ```
 
 ## Generating an id

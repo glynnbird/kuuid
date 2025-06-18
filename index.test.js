@@ -1,6 +1,6 @@
-const test = require('node:test')
-const assert = require('node:assert').strict
-const kuuid = require('./index.js')
+import test from 'node:test'
+import assert from 'node:assert/strict'
+import * as kuuid from './index.js'
 
 const sleep = async (ms) => {
   return new Promise((resolve, reject) => {
