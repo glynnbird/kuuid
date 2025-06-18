@@ -23,7 +23,7 @@ declare namespace kuuid {
     /** Whether to generate the id to second precision (false) or millisecond precision (true).
      * Default: false
      */
-    millsecond?: false;
+    millisecond?: boolean;
   }
 
   /**
