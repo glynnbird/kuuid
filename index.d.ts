@@ -87,6 +87,20 @@ declare namespace kuuid {
  * @return 32-character id
  */
   function idms(t?: string | number): string;
+
+  /**
+   * Generate a date/time sortable uuidv7 - short version without - characters
+   * @param t ISO-8601 date string or number of milliseconds since 1970
+   * @return 32-character id
+   */
+  function v7s(t?: string | number): string;
+
+  /**
+   * Generate a 36 character date/time sortable uuidv7
+   * @param t ISO-8601 date string or number of milliseconds since 1970
+   * @return 36-character id
+   */
+  function v7(t?: string | number): string;
 }
 
 export = kuuid

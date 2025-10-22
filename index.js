@@ -101,3 +101,26 @@ export function prefixReverse(t) {
 export function prefixReverseMs(t) {
   return prefix({ timestamp: t, reverse: true, millisecond: true })
 }
+
+export function v7s(t) {
+  t = tsms(t)
+  const prefix = t.toString(16).padStart(12, '0')
+  const fodder = crypto.randomBytes(10).toString('hex').split('')
+  fodder.splice(0, 1, '7') // first nibble must be 7
+  let variantNibble = parseInt(fodder[4], 16)
+  // set bits 64 & 65 to 1 and 0 respectively
+  variantNibble |= 0x8 // set the first bit 1000
+  variantNibble &= 0xb // unset the second bit: mask 1011
+  fodder[4] = variantNibble.toString(16)
+  return prefix + fodder.join('')
+}
+
+export function v7(t) {
+  const DELIMITER = '-'
+  const arr = v7s(t).split('')
+  arr.splice(8, 0, DELIMITER)
+  arr.splice(13, 0, DELIMITER)
+  arr.splice(18, 0, DELIMITER)
+  arr.splice(23, 0, DELIMITER)
+  return arr.join('')
+}

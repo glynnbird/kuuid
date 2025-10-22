@@ -2,11 +2,11 @@
 
 If you need unique identifiers in your Node.js app for use in a database such as Apache CouchDB or Cloudant, then *kuuid* can generate them. The ids it generates are:
 
-- uniform - all ids are 32 characters long.
+- uniform - all ids are 32 characters long (or 36 for `v7` ids)
 - unique - no two ids will be the same, or at least the likelihood of a clash is vanishingly small.
 - time-sortable - the ids sort into time order (or reverse time order), with one second (or millisecond) precision.
 
-If a `kuuid`-generated id were used as a database's unique identifier, it would sort roughly in time order (`kuuid.id()`), or reverse time order (`kuuid.idr()`)
+If a `kuuid`-generated id were used as a database's unique identifier, it would sort roughly in time order (`kuuid.v7()`).
 
 ## Installation
 
@@ -22,7 +22,38 @@ Import the library into your code with:
 import * as kuuid from 'kuuid'
 ```
 
-## Generating an id
+## UUID v7
+
+[UUID v7](https://www.rfc-editor.org/rfc/rfc9562#name-uuid-version-7) is the standards-compliant way of generating time-sortable unique ids. This is the preferred way of generating such ids and should be used instead of the 'kuuid.id()' function.
+
+```js
+let id = kuuid.v7()
+// '019a0c05-7c7f-7c1b-b908-ea4425364ec4'
+```
+
+This is the standard format of a UUIDv7 string. If you want a shorter variant without the '-' characters, there's `kuuid.v7s()`:
+
+```js
+let id = kuuid.v7s()
+// '019a0c0691b3732c89757a878857ea69'
+```
+
+Both variants accept either an integer representing the number of millseconds since 1970 or an ISO-8601 string representing the date/time to use. If omitted, the current time is used:
+
+```js
+// set the time using a timestamp
+const timestamp = new Date().getTime()
+kuuid.v7(timestamp)
+
+// set the time using a string
+const ISOString = new Date().toISOString()
+kuuid.v7(ISOString)
+
+// use the current time
+kuuid.v7()
+```
+
+## LEGACY: Generating an id
 
 Simply call the `kuuid.id()` function to get an id:
 

@@ -136,3 +136,76 @@ test('should return ids that sort correctly - short reverse mode', async functio
   // make sure sorting has had no effect i.e. they were sorted already
   assert.strictEqual(j1, j2)
 })
+
+test('v7 should return ids that sort correctly', async function (done) {
+  //this.timeout(30000)
+  const ids = []
+  for(let i = 0; i < 20; i++) {
+    ids.push(kuuid.v7())
+    await sleep(10)
+  }
+  const j1 = JSON.stringify(ids)
+  ids.sort()
+  const j2 = JSON.stringify(ids)
+  // make sure sorting has had no effect i.e. they were sorted already
+  assert.strictEqual(j1, j2)
+})
+test('v7s should return ids that sort correctly', async function (done) {
+  //this.timeout(30000)
+  const ids = []
+  for(let i = 0; i < 20; i++) {
+    ids.push(kuuid.v7s())
+    await sleep(10)
+  }
+  const j1 = JSON.stringify(ids)
+  ids.sort()
+  const j2 = JSON.stringify(ids)
+  // make sure sorting has had no effect i.e. they were sorted already
+  assert.strictEqual(j1, j2)
+})
+
+test('v7 should generate random data', function () {
+  //this.timeout(30000)
+  const ids = []
+  for (let i = 0; i < 10000; i++) {
+    const k = kuuid.v7()
+    assert.strictEqual(-1, ids.indexOf(k))
+    ids.push(k)
+  }
+})
+
+test('v7s should generate random data', function () {
+  //this.timeout(30000)
+  const ids = []
+  for (let i = 0; i < 10000; i++) {
+    const k = kuuid.v7s()
+    assert.strictEqual(-1, ids.indexOf(k))
+    ids.push(k)
+  }
+})
+
+test('v7s should return 32 character id', function () {
+  const x = kuuid.v7s()
+  assert.strictEqual(x.length, 32)
+})
+
+test('v7 should return 36 character id', function () {
+  const x = kuuid.v7()
+  assert.strictEqual(x.length, 36)
+})
+
+test('v7/v7s should have a version nibble of 7', function() {
+  const x = kuuid.v7()
+  assert.strictEqual(x[14], '7')
+  const y = kuuid.v7s()
+  assert.strictEqual(y[12], '7')
+})
+
+test('v7/v7s should have 10 (binary) as the variant bits', function() {
+  let x = kuuid.v7s()
+  let nibble16 = parseInt(x[16], 16).toString(2)
+  assert.ok(nibble16.startsWith('10'))
+  x = kuuid.v7().replace(/\-/g, '')
+  nibble16 = parseInt(x[16], 16).toString(2)
+  assert.ok(nibble16.startsWith('10'))
+})
