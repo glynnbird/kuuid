@@ -150,6 +150,7 @@ test('v7 should return ids that sort correctly', async function (done) {
   // make sure sorting has had no effect i.e. they were sorted already
   assert.strictEqual(j1, j2)
 })
+
 test('v7s should return ids that sort correctly', async function (done) {
   //this.timeout(30000)
   const ids = []
@@ -208,4 +209,17 @@ test('v7/v7s should have 10 (binary) as the variant bits', function() {
   x = kuuid.v7().replace(/\-/g, '')
   nibble16 = parseInt(x[16], 16).toString(2)
   assert.ok(nibble16.startsWith('10'))
+})
+
+test('v7 should return ids that sort correctly - fast', async function (done) {
+  //this.timeout(30000)
+  const ids = []
+  for(let i = 0; i < 1000; i++) {
+    ids.push(kuuid.v7())
+  }
+  const j1 = JSON.stringify(ids)
+  ids.sort()
+  const j2 = JSON.stringify(ids)
+  // make sure sorting has had no effect i.e. they were sorted already
+  assert.strictEqual(j1, j2)
 })
